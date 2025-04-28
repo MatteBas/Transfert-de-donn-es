@@ -1,17 +1,51 @@
+import DataBase.Dao.CategorieDAO;
 import DataBase.Dao.UnitsDAO;
 import DataBase.DolibarrDatabaseConnection;
 import DataBase.EBPDatabaseConnection;
+import ObjetDolibarr.Categorie;
 import ObjetDolibarr.Units;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 public class ProgrammeTransfertDeDonnees {
     public static void main(String[] args) {
-        UnitsDAO dao = new UnitsDAO();
+        CategorieDAO categorieDAO = new CategorieDAO();
+        ArrayList<Categorie>categories = new ArrayList<>();
+        categories = categorieDAO.getAllCategorie();
+        categories = categorieDAO.getAllSubCategorie(categories);
+        categorieDAO.insertCategorie(categories);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*UnitsDAO dao = new UnitsDAO();
         try (
                 Connection ebpConn = EBPDatabaseConnection.getConnection();
                 Connection dolibarrConn = DolibarrDatabaseConnection.getConnection();
@@ -64,6 +98,7 @@ public class ProgrammeTransfertDeDonnees {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
+    }*/
     }
 }
 

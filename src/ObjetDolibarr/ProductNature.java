@@ -1,12 +1,12 @@
 package ObjetDolibarr;
 
-public class Product_Type {
+public class ProductNature {
     int rowid;
     String code;
     String label;
     int active;
 
-    public Product_Type(int rowid, String code, String label, int active) {
+    public ProductNature(int rowid, String code, String label, int active) {
         this.rowid = rowid;
         this.code = code;
         this.label = label;
@@ -32,12 +32,15 @@ public class Product_Type {
     public void setRowid(int rowid) {
         this.rowid = rowid;
     }
+
     public void setCode(String code) {
         this.code = code;
     }
+
     public void setLabel(String label) {
         this.label = label;
     }
+
     public void setActive(int active) {
         this.active = active;
     }

@@ -1,6 +1,6 @@
 package ObjetDolibarr;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Categorie {
     private int rowid;
@@ -13,7 +13,7 @@ public class Categorie {
     private String color;
     private int position = 0;
     private Integer fkSoc;
-    private boolean visible = true;
+    private int visible;
     private Date dateCreation;
     private Date tms;
     private Integer fkUserCreat;
@@ -21,8 +21,8 @@ public class Categorie {
     private String importKey;
 
     // Constructor
-    public Categorie(int rowid, int entity, int fkParent, String label, String refExt, int type, String description, 
-                     String color, int position, Integer fkSoc, boolean visible, Date dateCreation, Date tms, 
+    public Categorie(int rowid, int entity, int fkParent, String label, String refExt, int type, String description,
+                     String color, int position, Integer fkSoc, int visible, Date dateCreation, Date tms,
                      Integer fkUserCreat, Integer fkUserModif, String importKey) {
         this.rowid = rowid;
         this.entity = entity;
@@ -123,15 +123,13 @@ public class Categorie {
         this.fkSoc = fkSoc;
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
+    public Integer getVisible () { return visible;}
 
-    public void setVisible(boolean visible) {
+    public void setVisible(Integer visible) {
         this.visible = visible;
     }
 
-    public Date getDateCreation() {
+    public java.sql.Date getDateCreation() {
         return dateCreation;
     }
 
@@ -139,7 +137,7 @@ public class Categorie {
         this.dateCreation = dateCreation;
     }
 
-    public Date getTms() {
+    public java.sql.Date getTms() {
         return tms;
     }
 
