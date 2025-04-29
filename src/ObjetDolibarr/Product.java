@@ -1,202 +1,867 @@
 package ObjetDolibarr;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Product {
 
-    int rowId;
-    String ref;
-    int entity;
-    String ref_ext;
-    Date datec;
-    Date tms;
-    int fk_parent;
-    String label;
-    String description;
-    String note_public;
-    String note;
-    String customCode;
-    int fk_country;
-    int fk_state;
-    Double price;
-    Double price_ttc;
-    Double price_min;
-    Double price_min_ttc;
-    String price_base_type;
-    String price_label;
-    double cost_price;
-    String dafault_vat_code;
-    Double tva_tx;
-    int recupeableOnly;
-    Double localtax1_tx;
-    Double localtax1_type;
-    Double localtax2_tx;
-    Double localtax2_type;
-    int fk_user_author;
-    int fk_user_modif;
-    int toSell;
-    int toBuy;
-    int toBatch;
-    int sell_or_eat_by_mandatory;
-    String batch_mask;
+    private int rowid;
+    private String ref;
+    private int entity;
+    private String refExt;
+    private Date datec;
+    private Timestamp tms;
+    private int fkParent;
+    private String label;
+    private String description;
+    private String notePublic;
+    private String note;
+    private String customCode;
+    private Integer fkCountry;
+    private Integer fkState;
+    private Double price;
+    private Double priceTtc;
+    private Double priceMin;
+    private Double priceMinTtc;
+    private String priceBaseType;
+    private String priceLabel;
+    private Double costPrice;
+    private String defaultVatCode;
+    private Double tvaTx;
+    private int recuperableOnly;
+    private Double localtax1Tx;
+    private String localtax1Type;
+    private Double localtax2Tx;
+    private String localtax2Type;
+    private Integer fkUserAuthor;
+    private Integer fkUserModif;
+    private Integer toSell;
+    private Integer toBuy;
+    private int toBatch;
+    private int sellOrEatByMandatory;
+    private String batchMask;
+    private Integer fkProductType;
+    private String duration;
+    private Float seuilStockAlerte;
+    private String url;
+    private String barcode;
+    private Integer fkBarcodeType;
+    private String accountancyCodeSell;
+    private String accountancyCodeSellIntra;
+    private String accountancyCodeSellExport;
+    private String accountancyCodeBuy;
+    private String accountancyCodeBuyIntra;
+    private String accountancyCodeBuyExport;
+    private String partNumber;
+    private Float netMeasure;
+    private Integer netMeasureUnits;
+    private Float weight;
+    private Integer weightUnits;
+    private Float length;
+    private Integer lengthUnits;
+    private Float width;
+    private Integer widthUnits;
+    private Float height;
+    private Integer heightUnits;
+    private Float surface;
+    private Integer surfaceUnits;
+    private Float volume;
+    private Integer volumeUnits;
+    private int stockableProduct;
+    private Double stock;
+    private Double pmp;
+    private Double fifo;
+    private Double lifo;
+    private Integer fkDefaultWarehouse;
+    private Integer fkDefaultBom;
+    private Integer fkDefaultWorkstation;
+    private String canvas;
+    private Integer finished;
+    private Integer lifetime;
+    private Integer qcFrequency;
+    private int hidden;
+    private String importKey;
+    private String modelPdf;
+    private Integer fkPriceExpression;
+    private Float desiredStock;
+    private Integer fkUnit;
+    private int priceAutogen;
+    private Integer fkProject;
+    private int mandatoryPeriod;
+    private String lastMainDoc;
 
-    // Nouveaux attributs
-    int fk_product_type;
-    String duration;
-    Float seuil_stock_alerte;
-    String url;
-    String barcode;
-    int fk_barcode_type;
-    String accountancy_code_sell;
-    String accountancy_code_sell_intra;
-    String accountancy_code_sell_export;
-    String accountancy_code_buy;
-    String accountancy_code_buy_intra;
-    String accountancy_code_buy_export;
-    String partnumber;
-    Float net_measure;
-    Integer net_measure_units;
-    Float width;
-    Integer width_unit;
-    int stockable_product;
-    Double stock;
-    Double pmp;
-    Double fifo;
-    Double lifo;
-    int fk_default_warehouse;
-    int fk_default_bom;
-    int fk_default_workstation;
-    String canvas;
-    Integer finished;
-    Integer lifetime;
-    Integer qc_frequency;
-    int hidden;
-    String import_key;
-    String model_pdf;
-    int fk_price_expression;
-    Float desiredstock;
-    int fk_unit;
-    int price_autogen;
-    int fk_project;
-    int mandatory_period;
-    String last_main_doc;
-
-    // Attribut des unités, llx_c_units
-    int weight;
-    int height;
-    int length;
-    int surface;
-    int volume;
-
-    int weight_unit;
-    int height_unit;
-    int length_unit;
-    int surface_unit;
-    int volume_unit;
-
-    public Product(
-        int weight, int height, int length, int surface, int volume, int weight_unit, int height_unit, int length_unit, int surface_unit, int volume_unit,
-        int fk_product_type, String duration, Float seuil_stock_alerte, String url, String barcode, int fk_barcode_type, String accountancy_code_sell,
-        String accountancy_code_sell_intra, String accountancy_code_sell_export, String accountancy_code_buy, String accountancy_code_buy_intra,
-        String accountancy_code_buy_export, String partnumber, Float net_measure, Integer net_measure_units, Float width, Integer width_unit,
-        int stockable_product, Double stock, Double pmp, Double fifo, Double lifo, int fk_default_warehouse, int fk_default_bom, int fk_default_workstation,
-        String canvas, Integer finished, Integer lifetime, Integer qc_frequency, int hidden, String import_key, String model_pdf, int fk_price_expression,
-        Float desiredstock, int fk_unit, int price_autogen, int fk_project, int mandatory_period, String last_main_doc,
-        // Nouveaux attributs manquants
-        int rowId, String ref, int entity, String ref_ext, Date datec, Date tms, int fk_parent, String label, String description, String note_public,
-        String note, String customCode, int fk_country, int fk_state, Double price, Double price_ttc, Double price_min, Double price_min_ttc,
-        String price_base_type, String price_label, double cost_price, String dafault_vat_code, Double tva_tx, int recupeableOnly, Double localtax1_tx,
-        Double localtax1_type, Double localtax2_tx, Double localtax2_type, int fk_user_author, int fk_user_modif, int toSell, int toBuy, int toBatch,
-        int sell_or_eat_by_mandatory, String batch_mask
-    ) {
-        // Attribut des unités, llx_c_units
-        this.weight = weight;
-        this.height = height;
-        this.length = length;
-        this.surface = surface;
-        this.volume = volume;
-        this.weight_unit = weight_unit;
-        this.height_unit = height_unit;
-        this.length_unit = length_unit;
-        this.surface_unit = surface_unit;
-        this.volume_unit = volume_unit;
-
-        // Nouveaux attributs
-        this.fk_product_type = fk_product_type;
+    public Product(int rowid, String ref, int entity, String refExt, Date datec, Timestamp tms, int fkParent, String label,
+                   String description, String notePublic, String note, String customCode, Integer fkCountry, Integer fkState,
+                   Double price, Double priceTtc, Double priceMin, Double priceMinTtc, String priceBaseType, String priceLabel,
+                   Double costPrice, String defaultVatCode, Double tvaTx, int recuperableOnly, Double localtax1Tx,
+                   String localtax1Type, Double localtax2Tx, String localtax2Type, Integer fkUserAuthor, Integer fkUserModif,
+                   Integer toSell, Integer toBuy, int toBatch, int sellOrEatByMandatory, String batchMask, Integer fkProductType,
+                   String duration, Float seuilStockAlerte, String url, String barcode, Integer fkBarcodeType,
+                   String accountancyCodeSell, String accountancyCodeSellIntra, String accountancyCodeSellExport,
+                   String accountancyCodeBuy, String accountancyCodeBuyIntra, String accountancyCodeBuyExport,
+                   String partNumber, Float netMeasure, Integer netMeasureUnits, Float weight, Integer weightUnits,
+                   Float length, Integer lengthUnits, Float width, Integer widthUnits, Float height, Integer heightUnits,
+                   Float surface, Integer surfaceUnits, Float volume, Integer volumeUnits, int stockableProduct, Double stock,
+                   Double pmp, Double fifo, Double lifo, Integer fkDefaultWarehouse, Integer fkDefaultBom,
+                   Integer fkDefaultWorkstation, String canvas, Integer finished, Integer lifetime, Integer qcFrequency,
+                   int hidden, String importKey, String modelPdf, Integer fkPriceExpression, Float desiredStock,
+                   Integer fkUnit, int priceAutogen, Integer fkProject, int mandatoryPeriod, String lastMainDoc) {
+        this.rowid = rowid;
+        this.ref = ref;
+        this.entity = entity;
+        this.refExt = refExt;
+        this.datec = datec;
+        this.tms = tms;
+        this.fkParent = fkParent;
+        this.label = label;
+        this.description = description;
+        this.notePublic = notePublic;
+        this.note = note;
+        this.customCode = customCode;
+        this.fkCountry = fkCountry;
+        this.fkState = fkState;
+        this.price = price;
+        this.priceTtc = priceTtc;
+        this.priceMin = priceMin;
+        this.priceMinTtc = priceMinTtc;
+        this.priceBaseType = priceBaseType;
+        this.priceLabel = priceLabel;
+        this.costPrice = costPrice;
+        this.defaultVatCode = defaultVatCode;
+        this.tvaTx = tvaTx;
+        this.recuperableOnly = recuperableOnly;
+        this.localtax1Tx = localtax1Tx;
+        this.localtax1Type = localtax1Type;
+        this.localtax2Tx = localtax2Tx;
+        this.localtax2Type = localtax2Type;
+        this.fkUserAuthor = fkUserAuthor;
+        this.fkUserModif = fkUserModif;
+        this.toSell = toSell;
+        this.toBuy = toBuy;
+        this.toBatch = toBatch;
+        this.sellOrEatByMandatory = sellOrEatByMandatory;
+        this.batchMask = batchMask;
+        this.fkProductType = fkProductType;
         this.duration = duration;
-        this.seuil_stock_alerte = seuil_stock_alerte;
+        this.seuilStockAlerte = seuilStockAlerte;
         this.url = url;
         this.barcode = barcode;
-        this.fk_barcode_type = fk_barcode_type;
-        this.accountancy_code_sell = accountancy_code_sell;
-        this.accountancy_code_sell_intra = accountancy_code_sell_intra;
-        this.accountancy_code_sell_export = accountancy_code_sell_export;
-        this.accountancy_code_buy = accountancy_code_buy;
-        this.accountancy_code_buy_intra = accountancy_code_buy_intra;
-        this.accountancy_code_buy_export = accountancy_code_buy_export;
-        this.partnumber = partnumber;
-        this.net_measure = net_measure;
-        this.net_measure_units = net_measure_units;
+        this.fkBarcodeType = fkBarcodeType;
+        this.accountancyCodeSell = accountancyCodeSell;
+        this.accountancyCodeSellIntra = accountancyCodeSellIntra;
+        this.accountancyCodeSellExport = accountancyCodeSellExport;
+        this.accountancyCodeBuy = accountancyCodeBuy;
+        this.accountancyCodeBuyIntra = accountancyCodeBuyIntra;
+        this.accountancyCodeBuyExport = accountancyCodeBuyExport;
+        this.partNumber = partNumber;
+        this.netMeasure = netMeasure;
+        this.netMeasureUnits = netMeasureUnits;
+        this.weight = weight;
+        this.weightUnits = weightUnits;
+        this.length = length;
+        this.lengthUnits = lengthUnits;
         this.width = width;
-        this.width_unit = width_unit;
-        this.stockable_product = stockable_product;
+        this.widthUnits = widthUnits;
+        this.height = height;
+        this.heightUnits = heightUnits;
+        this.surface = surface;
+        this.surfaceUnits = surfaceUnits;
+        this.volume = volume;
+        this.volumeUnits = volumeUnits;
+        this.stockableProduct = stockableProduct;
         this.stock = stock;
         this.pmp = pmp;
         this.fifo = fifo;
         this.lifo = lifo;
-        this.fk_default_warehouse = fk_default_warehouse;
-        this.fk_default_bom = fk_default_bom;
-        this.fk_default_workstation = fk_default_workstation;
+        this.fkDefaultWarehouse = fkDefaultWarehouse;
+        this.fkDefaultBom = fkDefaultBom;
+        this.fkDefaultWorkstation = fkDefaultWorkstation;
         this.canvas = canvas;
         this.finished = finished;
         this.lifetime = lifetime;
-        this.qc_frequency = qc_frequency;
+        this.qcFrequency = qcFrequency;
         this.hidden = hidden;
-        this.import_key = import_key;
-        this.model_pdf = model_pdf;
-        this.fk_price_expression = fk_price_expression;
-        this.desiredstock = desiredstock;
-        this.fk_unit = fk_unit;
-        this.price_autogen = price_autogen;
-        this.fk_project = fk_project;
-        this.mandatory_period = mandatory_period;
-        this.last_main_doc = last_main_doc;
+        this.importKey = importKey;
+        this.modelPdf = modelPdf;
+        this.fkPriceExpression = fkPriceExpression;
+        this.desiredStock = desiredStock;
+        this.fkUnit = fkUnit;
+        this.priceAutogen = priceAutogen;
+        this.fkProject = fkProject;
+        this.mandatoryPeriod = mandatoryPeriod;
+        this.lastMainDoc = lastMainDoc;
+    }
 
-        // Nouveaux attributs manquants
-        this.rowId = rowId;
+    // Getters et Setters
+    public int getRowid() {
+        return rowid;
+    }
+
+    public void setRowid(int rowid) {
+        this.rowid = rowid;
+    }
+
+    public String getRef() {
+        return ref;
+    }
+
+    public void setRef(String ref) {
         this.ref = ref;
+    }
+
+    public int getEntity() {
+        return entity;
+    }
+
+    public void setEntity(int entity) {
         this.entity = entity;
-        this.ref_ext = ref_ext;
+    }
+
+    public String getRefExt() {
+        return refExt;
+    }
+
+    public void setRefExt(String refExt) {
+        this.refExt = refExt;
+    }
+
+    public Date getDatec() {
+        return datec;
+    }
+
+    public void setDatec(Date datec) {
         this.datec = datec;
+    }
+
+    public Timestamp getTms() {
+        return tms;
+    }
+
+    public void setTms(Timestamp tms) {
         this.tms = tms;
-        this.fk_parent = fk_parent;
+    }
+
+    public int getFkParent() {
+        return fkParent;
+    }
+
+    public void setFkParent(int fkParent) {
+        this.fkParent = fkParent;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
         this.label = label;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
         this.description = description;
-        this.note_public = note_public;
+    }
+
+    public String getNotePublic() {
+        return notePublic;
+    }
+
+    public void setNotePublic(String notePublic) {
+        this.notePublic = notePublic;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getCustomCode() {
+        return customCode;
+    }
+
+    public void setCustomCode(String customCode) {
         this.customCode = customCode;
-        this.fk_country = fk_country;
-        this.fk_state = fk_state;
+    }
+
+    public Integer getFkCountry() {
+        return fkCountry;
+    }
+
+    public void setFkCountry(Integer fkCountry) {
+        this.fkCountry = fkCountry;
+    }
+
+    public Integer getFkState() {
+        return fkState;
+    }
+
+    public void setFkState(Integer fkState) {
+        this.fkState = fkState;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
         this.price = price;
-        this.price_ttc = price_ttc;
-        this.price_min = price_min;
-        this.price_min_ttc = price_min_ttc;
-        this.price_base_type = price_base_type;
-        this.price_label = price_label;
-        this.cost_price = cost_price;
-        this.dafault_vat_code = dafault_vat_code;
-        this.tva_tx = tva_tx;
-        this.recupeableOnly = recupeableOnly;
-        this.localtax1_tx = localtax1_tx;
-        this.localtax1_type = localtax1_type;
-        this.localtax2_tx = localtax2_tx;
-        this.localtax2_type = localtax2_type;
-        this.fk_user_author = fk_user_author;
-        this.fk_user_modif = fk_user_modif;
+    }
+
+    public Double getPriceTtc() {
+        return priceTtc;
+    }
+
+    public void setPriceTtc(Double priceTtc) {
+        this.priceTtc = priceTtc;
+    }
+
+    public Double getPriceMin() {
+        return priceMin;
+    }
+
+    public void setPriceMin(Double priceMin) {
+        this.priceMin = priceMin;
+    }
+
+    public Double getPriceMinTtc() {
+        return priceMinTtc;
+    }
+
+    public void setPriceMinTtc(Double priceMinTtc) {
+        this.priceMinTtc = priceMinTtc;
+    }
+
+    public String getPriceBaseType() {
+        return priceBaseType;
+    }
+
+    public void setPriceBaseType(String priceBaseType) {
+        this.priceBaseType = priceBaseType;
+    }
+
+    public String getPriceLabel() {
+        return priceLabel;
+    }
+
+    public void setPriceLabel(String priceLabel) {
+        this.priceLabel = priceLabel;
+    }
+
+    public Double getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Double costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public String getDefaultVatCode() {
+        return defaultVatCode;
+    }
+
+    public void setDefaultVatCode(String defaultVatCode) {
+        this.defaultVatCode = defaultVatCode;
+    }
+
+    public Double getTvaTx() {
+        return tvaTx;
+    }
+
+    public void setTvaTx(Double tvaTx) {
+        this.tvaTx = tvaTx;
+    }
+
+    public int getRecuperableOnly() {
+        return recuperableOnly;
+    }
+
+    public void setRecuperableOnly(int recuperableOnly) {
+        this.recuperableOnly = recuperableOnly;
+    }
+
+    public Double getLocaltax1Tx() {
+        return localtax1Tx;
+    }
+
+    public void setLocaltax1Tx(Double localtax1Tx) {
+        this.localtax1Tx = localtax1Tx;
+    }
+
+    public String getLocaltax1Type() {
+        return localtax1Type;
+    }
+
+    public void setLocaltax1Type(String localtax1Type) {
+        this.localtax1Type = localtax1Type;
+    }
+
+    public Double getLocaltax2Tx() {
+        return localtax2Tx;
+    }
+
+    public void setLocaltax2Tx(Double localtax2Tx) {
+        this.localtax2Tx = localtax2Tx;
+    }
+
+    public String getLocaltax2Type() {
+        return localtax2Type;
+    }
+
+    public void setLocaltax2Type(String localtax2Type) {
+        this.localtax2Type = localtax2Type;
+    }
+
+    public Integer getFkUserAuthor() {
+        return fkUserAuthor;
+    }
+
+    public void setFkUserAuthor(Integer fkUserAuthor) {
+        this.fkUserAuthor = fkUserAuthor;
+    }
+
+    public Integer getFkUserModif() {
+        return fkUserModif;
+    }
+
+    public void setFkUserModif(Integer fkUserModif) {
+        this.fkUserModif = fkUserModif;
+    }
+
+    public Integer getToSell() {
+        return toSell;
+    }
+
+    public void setToSell(Integer toSell) {
         this.toSell = toSell;
+    }
+
+    public Integer getToBuy() {
+        return toBuy;
+    }
+
+    public void setToBuy(Integer toBuy) {
         this.toBuy = toBuy;
+    }
+
+    public int getToBatch() {
+        return toBatch;
+    }
+
+    public void setToBatch(int toBatch) {
         this.toBatch = toBatch;
-        this.sell_or_eat_by_mandatory = sell_or_eat_by_mandatory;
-        this.batch_mask = batch_mask;
+    }
+
+    public int getSellOrEatByMandatory() {
+        return sellOrEatByMandatory;
+    }
+
+    public void setSellOrEatByMandatory(int sellOrEatByMandatory) {
+        this.sellOrEatByMandatory = sellOrEatByMandatory;
+    }
+
+    public String getBatchMask() {
+        return batchMask;
+    }
+
+    public void setBatchMask(String batchMask) {
+        this.batchMask = batchMask;
+    }
+
+    public Integer getFkProductType() {
+        return fkProductType;
+    }
+
+    public void setFkProductType(Integer fkProductType) {
+        this.fkProductType = fkProductType;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public Float getSeuilStockAlerte() {
+        return seuilStockAlerte;
+    }
+
+    public void setSeuilStockAlerte(Float seuilStockAlerte) {
+        this.seuilStockAlerte = seuilStockAlerte;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public Integer getFkBarcodeType() {
+        return fkBarcodeType;
+    }
+
+    public void setFkBarcodeType(Integer fkBarcodeType) {
+        this.fkBarcodeType = fkBarcodeType;
+    }
+
+    public String getAccountancyCodeSell() {
+        return accountancyCodeSell;
+    }
+
+    public void setAccountancyCodeSell(String accountancyCodeSell) {
+        this.accountancyCodeSell = accountancyCodeSell;
+    }
+
+    public String getAccountancyCodeSellIntra() {
+        return accountancyCodeSellIntra;
+    }
+
+    public void setAccountancyCodeSellIntra(String accountancyCodeSellIntra) {
+        this.accountancyCodeSellIntra = accountancyCodeSellIntra;
+    }
+
+    public String getAccountancyCodeSellExport() {
+        return accountancyCodeSellExport;
+    }
+
+    public void setAccountancyCodeSellExport(String accountancyCodeSellExport) {
+        this.accountancyCodeSellExport = accountancyCodeSellExport;
+    }
+
+    public String getAccountancyCodeBuy() {
+        return accountancyCodeBuy;
+    }
+
+    public void setAccountancyCodeBuy(String accountancyCodeBuy) {
+        this.accountancyCodeBuy = accountancyCodeBuy;
+    }
+
+    public String getAccountancyCodeBuyIntra() {
+        return accountancyCodeBuyIntra;
+    }
+
+    public void setAccountancyCodeBuyIntra(String accountancyCodeBuyIntra) {
+        this.accountancyCodeBuyIntra = accountancyCodeBuyIntra;
+    }
+
+    public String getAccountancyCodeBuyExport() {
+        return accountancyCodeBuyExport;
+    }
+
+    public void setAccountancyCodeBuyExport(String accountancyCodeBuyExport) {
+        this.accountancyCodeBuyExport = accountancyCodeBuyExport;
+    }
+
+    public String getPartNumber() {
+        return partNumber;
+    }
+
+    public void setPartNumber(String partNumber) {
+        this.partNumber = partNumber;
+    }
+
+    public Float getNetMeasure() {
+        return netMeasure;
+    }
+
+    public void setNetMeasure(Float netMeasure) {
+        this.netMeasure = netMeasure;
+    }
+
+    public Integer getNetMeasureUnits() {
+        return netMeasureUnits;
+    }
+
+    public void setNetMeasureUnits(Integer netMeasureUnits) {
+        this.netMeasureUnits = netMeasureUnits;
+    }
+
+    public Float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Float weight) {
+        this.weight = weight;
+    }
+
+    public Integer getWeightUnits() {
+        return weightUnits;
+    }
+
+    public void setWeightUnits(Integer weightUnits) {
+        this.weightUnits = weightUnits;
+    }
+
+    public Float getLength() {
+        return length;
+    }
+
+    public void setLength(Float length) {
+        this.length = length;
+    }
+
+    public Integer getLengthUnits() {
+        return lengthUnits;
+    }
+
+    public void setLengthUnits(Integer lengthUnits) {
+        this.lengthUnits = lengthUnits;
+    }
+
+    public Float getWidth() {
+        return width;
+    }
+
+    public void setWidth(Float width) {
+        this.width = width;
+    }
+
+    public Integer getWidthUnits() {
+        return widthUnits;
+    }
+
+    public void setWidthUnits(Integer widthUnits) {
+        this.widthUnits = widthUnits;
+    }
+
+    public Float getHeight() {
+        return height;
+    }
+
+    public void setHeight(Float height) {
+        this.height = height;
+    }
+
+    public Integer getHeightUnits() {
+        return heightUnits;
+    }
+
+    public void setHeightUnits(Integer heightUnits) {
+        this.heightUnits = heightUnits;
+    }
+
+    public Float getSurface() {
+        return surface;
+    }
+
+    public void setSurface(Float surface) {
+        this.surface = surface;
+    }
+
+    public Integer getSurfaceUnits() {
+        return surfaceUnits;
+    }
+
+    public void setSurfaceUnits(Integer surfaceUnits) {
+        this.surfaceUnits = surfaceUnits;
+    }
+
+    public Float getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Float volume) {
+        this.volume = volume;
+    }
+
+    public Integer getVolumeUnits() {
+        return volumeUnits;
+    }
+
+    public void setVolumeUnits(Integer volumeUnits) {
+        this.volumeUnits = volumeUnits;
+    }
+
+    public int getStockableProduct() {
+        return stockableProduct;
+    }
+
+    public void setStockableProduct(int stockableProduct) {
+        this.stockableProduct = stockableProduct;
+    }
+
+    public Double getStock() {
+        return stock;
+    }
+
+    public void setStock(Double stock) {
+        this.stock = stock;
+    }
+
+    public Double getPmp() {
+        return pmp;
+    }
+
+    public void setPmp(Double pmp) {
+        this.pmp = pmp;
+    }
+
+    public Double getFifo() {
+        return fifo;
+    }
+
+    public void setFifo(Double fifo) {
+        this.fifo = fifo;
+    }
+
+    public Double getLifo() {
+        return lifo;
+    }
+
+    public void setLifo(Double lifo) {
+        this.lifo = lifo;
+    }
+
+    public Integer getFkDefaultWarehouse() {
+        return fkDefaultWarehouse;
+    }
+
+    public void setFkDefaultWarehouse(Integer fkDefaultWarehouse) {
+        this.fkDefaultWarehouse = fkDefaultWarehouse;
+    }
+
+    public Integer getFkDefaultBom() {
+        return fkDefaultBom;
+    }
+
+    public void setFkDefaultBom(Integer fkDefaultBom) {
+        this.fkDefaultBom = fkDefaultBom;
+    }
+
+    public Integer getFkDefaultWorkstation() {
+        return fkDefaultWorkstation;
+    }
+
+    public void setFkDefaultWorkstation(Integer fkDefaultWorkstation) {
+        this.fkDefaultWorkstation = fkDefaultWorkstation;
+    }
+
+    public String getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(String canvas) {
+        this.canvas = canvas;
+    }
+
+    public Integer getFinished() {
+        return finished;
+    }
+
+    public void setFinished(Integer finished) {
+        this.finished = finished;
+    }
+
+    public Integer getLifetime() {
+        return lifetime;
+    }
+
+    public void setLifetime(Integer lifetime) {
+        this.lifetime = lifetime;
+    }
+
+    public Integer getQcFrequency() {
+        return qcFrequency;
+    }
+
+    public void setQcFrequency(Integer qcFrequency) {
+        this.qcFrequency = qcFrequency;
+    }
+
+    public int getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(int hidden) {
+        this.hidden = hidden;
+    }
+
+    public String getImportKey() {
+        return importKey;
+    }
+
+    public void setImportKey(String importKey) {
+        this.importKey = importKey;
+    }
+
+    public String getModelPdf() {
+        return modelPdf;
+    }
+
+    public void setModelPdf(String modelPdf) {
+        this.modelPdf = modelPdf;
+    }
+
+    public Integer getFkPriceExpression() {
+        return fkPriceExpression;
+    }
+
+    public void setFkPriceExpression(Integer fkPriceExpression) {
+        this.fkPriceExpression = fkPriceExpression;
+    }
+
+    public Float getDesiredStock() {
+        return desiredStock;
+    }
+
+    public void setDesiredStock(Float desiredStock) {
+        this.desiredStock = desiredStock;
+    }
+
+    public Integer getFkUnit() {
+        return fkUnit;
+    }
+
+    public void setFkUnit(Integer fkUnit) {
+        this.fkUnit = fkUnit;
+    }
+
+    public int getPriceAutogen() {
+        return priceAutogen;
+    }
+
+    public void setPriceAutogen(int priceAutogen) {
+        this.priceAutogen = priceAutogen;
+    }
+
+    public Integer getFkProject() {
+        return fkProject;
+    }
+
+    public void setFkProject(Integer fkProject) {
+        this.fkProject = fkProject;
+    }
+
+    public int getMandatoryPeriod() {
+        return mandatoryPeriod;
+    }
+
+    public void setMandatoryPeriod(int mandatoryPeriod) {
+        this.mandatoryPeriod = mandatoryPeriod;
+    }
+
+    public String getLastMainDoc() {
+        return lastMainDoc;
+    }
+
+    public void setLastMainDoc(String lastMainDoc) {
+        this.lastMainDoc = lastMainDoc;
     }
 }
