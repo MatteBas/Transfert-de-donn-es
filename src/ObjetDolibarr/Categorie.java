@@ -3,17 +3,18 @@ package ObjetDolibarr;
 import java.sql.Date;
 
 public class Categorie {
-    private int rowid;
-    private int entity = 1;
-    private int fkParent = 0;
+
+    private Integer rowid;
+    private Integer entity = 1;
+    private Integer fkParent = 0;
     private String label;
     private String refExt;
-    private int type = 1;
+    private Integer type = 1;
     private String description;
     private String color;
-    private int position = 0;
+    private Integer position = 0;
     private Integer fkSoc;
-    private int visible;
+    private Integer visible;
     private Date dateCreation;
     private Date tms;
     private Integer fkUserCreat;
@@ -21,8 +22,8 @@ public class Categorie {
     private String importKey;
 
     // Constructor
-    public Categorie(int rowid, int entity, int fkParent, String label, String refExt, int type, String description,
-                     String color, int position, Integer fkSoc, int visible, Date dateCreation, Date tms,
+    public Categorie(Integer rowid, Integer entity, Integer fkParent, String label, String refExt, Integer type, String description,
+                     String color, Integer position, Integer fkSoc, Integer visible, Date dateCreation, Date tms,
                      Integer fkUserCreat, Integer fkUserModif, String importKey) {
         this.rowid = rowid;
         this.entity = entity;
@@ -43,7 +44,7 @@ public class Categorie {
     }
 
     // Getters and setters for all attributes
-    public int getRowid() {
+    public Integer getRowid() {
         return rowid;
     }
 
@@ -51,7 +52,7 @@ public class Categorie {
         this.rowid = rowid;
     }
 
-    public int getEntity() {
+    public Integer getEntity() {
         return entity;
     }
 
@@ -59,7 +60,7 @@ public class Categorie {
         this.entity = entity;
     }
 
-    public int getFkParent() {
+    public Integer getFkParent() {
         return fkParent;
     }
 
@@ -83,7 +84,7 @@ public class Categorie {
         this.refExt = refExt;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
@@ -107,7 +108,7 @@ public class Categorie {
         this.color = color;
     }
 
-    public int getPosition() {
+    public Integer getPosition() {
         return position;
     }
 

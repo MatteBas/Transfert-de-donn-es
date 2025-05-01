@@ -52,7 +52,7 @@ public class CategorieDAO {
         return categoriesArray;
     }
 
-    public ArrayList<Categorie> getAllSubCategorie(ArrayList<Categorie> categoriesArray) {
+    /*public ArrayList<Categorie> getAllSubCategorie(ArrayList<Categorie> categoriesArray) {
         int rowId = categoriesArray.getLast().getRowid();
 
         String query = "SELECT Caption, ItemFamilyId, SysCreatedDate, SysModifiedDate FROM ItemSubFamily";
@@ -95,7 +95,7 @@ public class CategorieDAO {
 
         return categoriesArray;
     }
-
+*/
     public void insertCategorie(ArrayList<Categorie> categoriesArray) {
         String query = "INSERT INTO llx_categorie " +
                 "(entity, fk_parent, label, ref_ext, type, description, color, position, fk_soc, visible, date_creation, tms, fk_user_creat, fk_user_modif, import_key) " +
@@ -113,7 +113,7 @@ public class CategorieDAO {
                 stmtDolibarr.setString(6, cat.getDescription());
                 stmtDolibarr.setString(7, cat.getColor());
                 stmtDolibarr.setInt(8, cat.getPosition());
-                stmtDolibarr.setInt(9, cat.getFkSoc());
+                stmtDolibarr.setObject(9, cat.getFkSoc());
                 stmtDolibarr.setInt(10, cat.getVisible());
                 stmtDolibarr.setDate(11, cat.getDateCreation());
                 stmtDolibarr.setDate(12, cat.getTms());

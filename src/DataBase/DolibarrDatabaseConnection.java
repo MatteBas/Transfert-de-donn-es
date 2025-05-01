@@ -16,4 +16,5 @@ public class DolibarrDatabaseConnection {
         Class.forName("org.mariadb.jdbc.Driver");
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
+
 }

@@ -1,8 +1,8 @@
-import DataBase.Dao.CategorieDAO;
-import DataBase.Dao.UnitsDAO;
+import DataBase.Dao.*;
 import DataBase.DolibarrDatabaseConnection;
 import DataBase.EBPDatabaseConnection;
 import ObjetDolibarr.Categorie;
+import ObjetDolibarr.Product;
 import ObjetDolibarr.Units;
 
 import java.sql.Connection;
@@ -13,12 +13,24 @@ import java.util.ArrayList;
 
 
 public class ProgrammeTransfertDeDonnees {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+
         CategorieDAO categorieDAO = new CategorieDAO();
         ArrayList<Categorie>categories = new ArrayList<>();
         categories = categorieDAO.getAllCategorie();
-        categories = categorieDAO.getAllSubCategorie(categories);
         categorieDAO.insertCategorie(categories);
+
+        ProductNatureDAO fourniture = new ProductNatureDAO();
+        fourniture.insertProductNature();
+
+        ProductDAO productDAO = new ProductDAO();
+        ArrayList<Product> products = new ArrayList<>();
+        products = productDAO.getAllProducts();
+        productDAO.insertProduct(products);
+
+        ProductCategorieDAO productCategorieDAO = new ProductCategorieDAO();
+        productCategorieDAO.insertProductCategorie(products);
+
 
 
 

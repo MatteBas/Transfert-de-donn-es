@@ -3,6 +3,7 @@ package DataBase.Dao;
 import DataBase.DolibarrDatabaseConnection;
 import DataBase.EBPDatabaseConnection;
 import ObjetDolibarr.Categorie;
+import ObjetDolibarr.Product;
 import ObjetDolibarr.ProductCategorie;
 import Utilitaire.FamilyUtilitaire;
 import jdk.jfr.Description;
@@ -15,7 +16,101 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductCategorieDAO {
-    int rowId = 0;
+
+
+    public String getFamilyId(String idItem) {
+        String familyId = null;
+        String sql = "SELECT FamilyId FROM Item WHERE Id = ?";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, idItem);              // bind du paramètre
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    familyId = rs.getString("FamilyId");
+                }
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return familyId;
+    }
+
+    public String getFamilyCaptionFromID(String familyId) throws SQLException, ClassNotFoundException {
+        String familyCaption = null;
+
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String queryFamily = "SELECT Caption FROM ItemFamily WHERE Id = ?";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(queryFamily)) {
+                stmt.setString(1, familyId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        familyCaption = rs.getString("Caption");
+                    }
+                }
+            }
+
+            return familyCaption;
+        }
+    }
+
+    public Integer getRowIdFromCaption(String caption) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
+
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT rowid FROM llx_categorie WHERE label = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, caption);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        rowId = rs.getInt("rowid");
+                    }
+                }
+            }
+
+            return rowId;
+        }
+    }
+
+
+    public void insertProductCategorie(List<Product> products) {
+        String query = "INSERT INTO llx_categorie_product"
+                + " (fk_categorie, fk_product, import_key)"
+                + " VALUES (?, ?, null)";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection();
+             PreparedStatement insertStmt = conn.prepareStatement(query)) {
+
+            // Pour chaque produit, on calcule les IDs, on bind les paramètres et on exécute l'INSERT
+            for (Product product : products) {
+                String familyId        = getFamilyId(product.getRef());
+                String familyCaption   = getFamilyCaptionFromID(familyId);
+                Integer rowId          = getRowIdFromCaption(familyCaption);
+
+                if (rowId != null) {
+                    insertStmt.setInt(1, rowId);
+                    insertStmt.setInt(2, product.getRowid());
+                    insertStmt.executeUpdate();
+                }
+            }
+
+            System.out.println("Insertion des catégories-produits terminée.");
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+}
+         /*int rowId = 0;
     String familyId;
     String subFamilyId;
 
@@ -123,5 +218,4 @@ public class ProductCategorieDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
-}
+    }*/

@@ -2,16 +2,16 @@ package ObjetDolibarr;
 
 // Cette classe est une copie de la classe Units de Dolibarr (llx_c_units
 public class Units {
-    int rowid;
+    Integer rowid;
     String code;
-    short sortOrder;
-    int scale;
+    Short sortOrder;
+    Integer scale;
     String label;
     String short_label;
     String unit_type;
-    short active;
+    Short active;
 
-    public Units( int rowid, String code, short sortOrder, int scale, String label, String short_label, String unit_type, short active) {
+    public Units( Integer rowid, String code, Short sortOrder, Integer scale, String label, String short_label, String unit_type, Short active) {
         this.rowid = rowid;
         this.code = code;
         this.sortOrder = sortOrder;
@@ -22,16 +22,16 @@ public class Units {
         this.active = active;
     }
 
-    public int getRowid() {
+    public Integer getRowid() {
         return this.rowid;
     }
     public String getCode() {
         return this.code;
     }
-    public short getSortOrder() {
+    public Short getSortOrder() {
         return this.sortOrder;
     }
-    public int getScale() {
+    public Integer getScale() {
         return this.scale;
     }
     public String getLabel() {
@@ -43,7 +43,7 @@ public class Units {
     public String getUnitType() {
         return this.unit_type;
     }
-    public short getActive() {
+    public Short getActive() {
         return this.active;
     }
 

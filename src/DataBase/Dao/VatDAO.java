@@ -19,12 +19,17 @@ public class VatDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
-            accountingCodes.add(rs.getInt("SellingCollectionVatAccount"));
-            accountingCodes.add(rs.getInt("SellingDebitVatAccount"));
-            accountingCodes.add(rs.getInt("SellingGoodsAccount"));
-            accountingCodes.add(rs.getInt("PurchaseCollectionVatAccount"));
-            accountingCodes.add(rs.getInt("PurchaseDebitVatAccount"));
-            accountingCodes.add(rs.getInt("PurchaseGoodsAccount"));
+            if (rs.next()) {
+                accountingCodes.add(rs.getInt("SellingCollectionVatAccount"));
+                accountingCodes.add(rs.getInt("SellingDebitVatAccount"));
+                accountingCodes.add(rs.getInt("SellingGoodsAccount"));
+                accountingCodes.add(rs.getInt("PurchaseCollectionVatAccount"));
+                accountingCodes.add(rs.getInt("PurchaseDebitVatAccount"));
+                accountingCodes.add(rs.getInt("PurchaseGoodsAccount"));
+            } else {
+                // Optionnel : gérer le cas où aucune ligne n'a été retournée
+                System.err.println("Aucun code comptable trouvé pour cet Id de TVA.");
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

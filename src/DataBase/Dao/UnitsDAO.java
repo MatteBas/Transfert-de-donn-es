@@ -57,4 +57,20 @@ public class UnitsDAO {
 
         return scale;
     }
+
+    public Integer getRowIDFromCode(String unitCode) {
+        String sql = "SELECT rowid FROM llx_c_units WHERE code = ?";
+        try ( Connection conn = DolibarrDatabaseConnection.getConnection();
+              PreparedStatement ps = conn.prepareStatement(sql) ) {
+            ps.setString(1, unitCode);
+            try ( ResultSet rs = ps.executeQuery() ) {
+                if (rs.next()) {
+                    return rs.getInt("rowid");
+                }
+            }
+        } catch (SQLException|ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

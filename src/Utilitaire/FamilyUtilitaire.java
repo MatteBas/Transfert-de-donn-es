@@ -3,7 +3,7 @@ package Utilitaire;
 public class FamilyUtilitaire {
         private String str1;
         private String str2;
-        private String str3;
+
 
         public FamilyUtilitaire(String str1, String str2) {
             this.str1 = str1;

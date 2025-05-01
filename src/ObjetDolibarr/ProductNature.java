@@ -1,19 +1,19 @@
 package ObjetDolibarr;
 
 public class ProductNature {
-    int rowid;
+    Integer rowid;
     String code;
     String label;
-    int active;
+    Integer active;
 
-    public ProductNature(int rowid, String code, String label, int active) {
+    public ProductNature(Integer rowid, String code, String label, Integer active) {
         this.rowid = rowid;
         this.code = code;
         this.label = label;
         this.active = active;
     }
 
-    public int getRowid() {
+    public Integer getRowid() {
         return rowid;
     }
 
@@ -25,11 +25,11 @@ public class ProductNature {
         return label;
     }
 
-    public int getActive() {
+    public Integer getActive() {
         return active;
     }
 
-    public void setRowid(int rowid) {
+    public void setRowid(Integer rowid) {
         this.rowid = rowid;
     }
 
@@ -41,7 +41,7 @@ public class ProductNature {
         this.label = label;
     }
 
-    public void setActive(int active) {
+    public void setActive(Integer active) {
         this.active = active;
     }
 }

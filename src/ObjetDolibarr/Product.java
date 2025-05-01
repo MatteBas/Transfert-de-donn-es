@@ -5,13 +5,13 @@ import java.sql.Timestamp;
 
 public class Product {
 
-    private int rowid;
+    private Integer rowid;
     private String ref;
-    private int entity;
+    private Integer entity;
     private String refExt;
     private Date datec;
     private Timestamp tms;
-    private int fkParent;
+    private Integer fkParent;
     private String label;
     private String description;
     private String notePublic;
@@ -28,7 +28,7 @@ public class Product {
     private Double costPrice;
     private String defaultVatCode;
     private Double tvaTx;
-    private int recuperableOnly;
+    private Integer recuperableOnly;
     private Double localtax1Tx;
     private String localtax1Type;
     private Double localtax2Tx;
@@ -37,8 +37,8 @@ public class Product {
     private Integer fkUserModif;
     private Integer toSell;
     private Integer toBuy;
-    private int toBatch;
-    private int sellOrEatByMandatory;
+    private Integer toBatch;
+    private Integer sellOrEatByMandatory;
     private String batchMask;
     private Integer fkProductType;
     private String duration;
@@ -67,7 +67,7 @@ public class Product {
     private Integer surfaceUnits;
     private Float volume;
     private Integer volumeUnits;
-    private int stockableProduct;
+    private Integer stockableProduct;
     private Double stock;
     private Double pmp;
     private Double fifo;
@@ -79,33 +79,33 @@ public class Product {
     private Integer finished;
     private Integer lifetime;
     private Integer qcFrequency;
-    private int hidden;
+    private Integer hidden;
     private String importKey;
     private String modelPdf;
     private Integer fkPriceExpression;
     private Float desiredStock;
     private Integer fkUnit;
-    private int priceAutogen;
+    private Integer priceAutogen;
     private Integer fkProject;
-    private int mandatoryPeriod;
+    private Integer mandatoryPeriod;
     private String lastMainDoc;
 
-    public Product(int rowid, String ref, int entity, String refExt, Date datec, Timestamp tms, int fkParent, String label,
+    public Product(Integer rowid, String ref, Integer entity, String refExt, Date datec, Timestamp tms, Integer fkParent, String label,
                    String description, String notePublic, String note, String customCode, Integer fkCountry, Integer fkState,
                    Double price, Double priceTtc, Double priceMin, Double priceMinTtc, String priceBaseType, String priceLabel,
-                   Double costPrice, String defaultVatCode, Double tvaTx, int recuperableOnly, Double localtax1Tx,
+                   Double costPrice, String defaultVatCode, Double tvaTx, Integer recuperableOnly, Double localtax1Tx,
                    String localtax1Type, Double localtax2Tx, String localtax2Type, Integer fkUserAuthor, Integer fkUserModif,
-                   Integer toSell, Integer toBuy, int toBatch, int sellOrEatByMandatory, String batchMask, Integer fkProductType,
+                   Integer toSell, Integer toBuy, Integer toBatch, Integer sellOrEatByMandatory, String batchMask, Integer fkProductType,
                    String duration, Float seuilStockAlerte, String url, String barcode, Integer fkBarcodeType,
                    String accountancyCodeSell, String accountancyCodeSellIntra, String accountancyCodeSellExport,
                    String accountancyCodeBuy, String accountancyCodeBuyIntra, String accountancyCodeBuyExport,
                    String partNumber, Float netMeasure, Integer netMeasureUnits, Float weight, Integer weightUnits,
                    Float length, Integer lengthUnits, Float width, Integer widthUnits, Float height, Integer heightUnits,
-                   Float surface, Integer surfaceUnits, Float volume, Integer volumeUnits, int stockableProduct, Double stock,
+                   Float surface, Integer surfaceUnits, Float volume, Integer volumeUnits, Integer stockableProduct, Double stock,
                    Double pmp, Double fifo, Double lifo, Integer fkDefaultWarehouse, Integer fkDefaultBom,
                    Integer fkDefaultWorkstation, String canvas, Integer finished, Integer lifetime, Integer qcFrequency,
-                   int hidden, String importKey, String modelPdf, Integer fkPriceExpression, Float desiredStock,
-                   Integer fkUnit, int priceAutogen, Integer fkProject, int mandatoryPeriod, String lastMainDoc) {
+                   Integer hidden, String importKey, String modelPdf, Integer fkPriceExpression, Float desiredStock,
+                   Integer fkUnit, Integer priceAutogen, Integer fkProject, Integer mandatoryPeriod, String lastMainDoc) {
         this.rowid = rowid;
         this.ref = ref;
         this.entity = entity;
@@ -193,11 +193,11 @@ public class Product {
     }
 
     // Getters et Setters
-    public int getRowid() {
+    public Integer getRowid() {
         return rowid;
     }
 
-    public void setRowid(int rowid) {
+    public void setRowid(Integer rowid) {
         this.rowid = rowid;
     }
 
@@ -209,11 +209,11 @@ public class Product {
         this.ref = ref;
     }
 
-    public int getEntity() {
+    public Integer getEntity() {
         return entity;
     }
 
-    public void setEntity(int entity) {
+    public void setEntity(Integer entity) {
         this.entity = entity;
     }
 
@@ -241,11 +241,11 @@ public class Product {
         this.tms = tms;
     }
 
-    public int getFkParent() {
+    public Integer getFkParent() {
         return fkParent;
     }
 
-    public void setFkParent(int fkParent) {
+    public void setFkParent(Integer fkParent) {
         this.fkParent = fkParent;
     }
 
@@ -377,11 +377,11 @@ public class Product {
         this.tvaTx = tvaTx;
     }
 
-    public int getRecuperableOnly() {
+    public Integer getRecuperableOnly() {
         return recuperableOnly;
     }
 
-    public void setRecuperableOnly(int recuperableOnly) {
+    public void setRecuperableOnly(Integer recuperableOnly) {
         this.recuperableOnly = recuperableOnly;
     }
 
@@ -449,19 +449,19 @@ public class Product {
         this.toBuy = toBuy;
     }
 
-    public int getToBatch() {
+    public Integer getToBatch() {
         return toBatch;
     }
 
-    public void setToBatch(int toBatch) {
+    public void setToBatch(Integer toBatch) {
         this.toBatch = toBatch;
     }
 
-    public int getSellOrEatByMandatory() {
+    public Integer getSellOrEatByMandatory() {
         return sellOrEatByMandatory;
     }
 
-    public void setSellOrEatByMandatory(int sellOrEatByMandatory) {
+    public void setSellOrEatByMandatory(Integer sellOrEatByMandatory) {
         this.sellOrEatByMandatory = sellOrEatByMandatory;
     }
 
@@ -689,11 +689,11 @@ public class Product {
         this.volumeUnits = volumeUnits;
     }
 
-    public int getStockableProduct() {
+    public Integer getStockableProduct() {
         return stockableProduct;
     }
 
-    public void setStockableProduct(int stockableProduct) {
+    public void setStockableProduct(Integer stockableProduct) {
         this.stockableProduct = stockableProduct;
     }
 
@@ -785,11 +785,11 @@ public class Product {
         this.qcFrequency = qcFrequency;
     }
 
-    public int getHidden() {
+    public Integer getHidden() {
         return hidden;
     }
 
-    public void setHidden(int hidden) {
+    public void setHidden(Integer hidden) {
         this.hidden = hidden;
     }
 
@@ -833,11 +833,11 @@ public class Product {
         this.fkUnit = fkUnit;
     }
 
-    public int getPriceAutogen() {
+    public Integer getPriceAutogen() {
         return priceAutogen;
     }
 
-    public void setPriceAutogen(int priceAutogen) {
+    public void setPriceAutogen(Integer priceAutogen) {
         this.priceAutogen = priceAutogen;
     }
 
@@ -849,11 +849,11 @@ public class Product {
         this.fkProject = fkProject;
     }
 
-    public int getMandatoryPeriod() {
+    public Integer getMandatoryPeriod() {
         return mandatoryPeriod;
     }
 
-    public void setMandatoryPeriod(int mandatoryPeriod) {
+    public void setMandatoryPeriod(Integer mandatoryPeriod) {
         this.mandatoryPeriod = mandatoryPeriod;
     }
 

@@ -12,25 +12,28 @@ public class ProductDAO {
 
     public ArrayList<Product> getAllProducts() throws SQLException, ClassNotFoundException {
         ArrayList<Product> listProducts = new ArrayList<>();
-        int rowId = 0;
+        Integer rowId = 0;
         Product product;
 
-        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, Notes, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, CurrentStockAmount, Pump FROM Item WHERE ItemType = 0";
+        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, Notes, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, CurrentStockAccount, Pump FROM Item WHERE ItemType = 0";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
+            while (rs.next()) {
 
             VatDAO vatDAO = new VatDAO();
             ArrayList<Integer> accountingCodes = vatDAO.getAccountingCode();
 
             UnitsDAO unitsDAO = new UnitsDAO();
-            int weightScale = unitsDAO.getScaleFromUnit(rs.getString("WeightUnitId"));
-            int volumeScale = unitsDAO.getScaleFromUnit(rs.getString("VolumeUnitId"));
-            int dimensionScale = unitsDAO.getScaleFromUnit(rs.getString("DimensionUnitId"));
+            Integer weightScale = unitsDAO.getScaleFromUnit(rs.getString("WeightUnitId"));
+            Integer volumeScale = unitsDAO.getScaleFromUnit(rs.getString("VolumeUnitId"));
+            Integer dimensionScale = unitsDAO.getScaleFromUnit(rs.getString("DimensionUnitId"));
+
+             Integer sellUnit = unitsDAO.getRowIDFromCode(rs.getString("UnitId"));
 
 
-            while (rs.next()) {
+
                 rowId++;
                 product = new Product(
                         rowId,
@@ -96,7 +99,7 @@ public class ProductDAO {
                         rs.getFloat("Volume"),
                         volumeScale,
                         1,
-                        rs.getDouble("CurrentStockAmount"),
+                        rs.getDouble("CurrentStockAccount"),
                         rs.getDouble("Pump"),
                         null,
                         null,
@@ -112,7 +115,7 @@ public class ProductDAO {
                         null,
                         null,
                         0.0000f,
-                        rs.getInt("UnitId"),
+                        sellUnit,
                         0,
                         null,
                         0,
