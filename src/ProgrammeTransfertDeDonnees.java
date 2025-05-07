@@ -3,6 +3,7 @@ import DataBase.DolibarrDatabaseConnection;
 import DataBase.EBPDatabaseConnection;
 import ObjetDolibarr.Categorie;
 import ObjetDolibarr.Product;
+import ObjetDolibarr.ThirdParty;
 import ObjetDolibarr.Units;
 
 import java.sql.Connection;
@@ -30,6 +31,15 @@ public class ProgrammeTransfertDeDonnees {
 
         ProductCategorieDAO productCategorieDAO = new ProductCategorieDAO();
         productCategorieDAO.insertProductCategorie(products);
+
+        ThirdPartyDAO thirdPartyDAO = new ThirdPartyDAO();
+        ArrayList<ThirdParty> customers = new ArrayList<>();
+        customers = thirdPartyDAO.getCustomers();
+        thirdPartyDAO.insertThirdParty(customers);
+
+        ArrayList<ThirdParty> suppliers = new ArrayList<>();
+        suppliers = thirdPartyDAO.getSuppliers();
+        thirdPartyDAO.insertSuppliers(suppliers);
 
 
 

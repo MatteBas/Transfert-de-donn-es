@@ -15,7 +15,7 @@ public class ProductDAO {
         Integer rowId = 0;
         Product product;
 
-        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, Notes, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, CurrentStockAccount, Pump FROM Item WHERE ItemType = 0";
+        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, Notes, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, RealStock, Pump FROM Item WHERE ItemType = 0";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -71,7 +71,7 @@ public class ProductDAO {
                         0,
                         0,
                         null,
-                        2,
+                        0,
                         "0",
                         0.0000f,
                         null,
@@ -99,7 +99,7 @@ public class ProductDAO {
                         rs.getFloat("Volume"),
                         volumeScale,
                         1,
-                        rs.getDouble("CurrentStockAccount"),
+                        rs.getDouble("RealStock"),
                         rs.getDouble("Pump"),
                         null,
                         null,
