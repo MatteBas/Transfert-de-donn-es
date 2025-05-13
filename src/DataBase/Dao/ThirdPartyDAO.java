@@ -11,7 +11,7 @@ public class ThirdPartyDAO {
     public ArrayList<ThirdParty> getCustomers() {
         int rowId = 0;
         ArrayList<ThirdParty> customersArray = new ArrayList<>();
-        String query = "SELECT Id, Name, MainDeliveryContact_Name,  MainDeliveryContact_FirstName, Accounts_Account, MainDeliveryAddress_Address1, MainDeliveryAddress_ZipCode, MainDeliveryAddress_City, MainDeliveryAddress_State, MainDeliveryAddress_CountryIsoCode,  MainDeliveryContact_Phone,  MainDeliveryContact_Cellphone,  MainDeliveryContact_Fax,  MainDeliveryContact_Email, Siren, Nic, Naf, CurrentAmount, DiscountRate FROM Customer";
+        String query = "SELECT Id, Name, MainDeliveryContact_Name,  MainDeliveryContact_FirstName, Accounts_Account, MainDeliveryAddress_Address1, MainDeliveryAddress_ZipCode, MainDeliveryAddress_City, MainDeliveryAddress_State, MainDeliveryAddress_CountryIsoCode,  MainDeliveryContact_Phone,  MainDeliveryContact_Cellphone,  MainDeliveryContact_Fax,  MainDeliveryContact_Email, Siren, Nic, Naf, CurrentAmount, DiscountRate,IntracommunityVATNumber ,NotesClear FROM Customer";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -28,7 +28,7 @@ public class ThirdPartyDAO {
                 ThirdParty customer = new ThirdParty(
                         rowId,
                         rs.getString("Name"),
-                        alias,
+                        "",
                         1,
                         null,
                         0,
@@ -58,17 +58,17 @@ public class ThirdPartyDAO {
                         null,
                         null,
                         null,
-                        null,
                         rs.getString("Siren"),
                         siret,
                         rs.getString("Naf"),
                         null,
                         null,
                         null,
+                        rs.getString("IntracommunityVATNumber"),
                         null,
                         null,
                         null,
-                        null,
+                        rs.getString("NotesClear"),
                         null,
                         null,
                         null,
@@ -83,15 +83,15 @@ public class ThirdPartyDAO {
                         null,
                         rs.getDouble("DiscountRate"),
                         null,
+                        7,
+                        2,
                         null,
                         null,
                         null,
                         null,
                         null,
                         null,
-                        null,
-                        null,
-                        null,
+                        1,
                         null,
                         null,
                         null,
@@ -135,38 +135,43 @@ public class ThirdPartyDAO {
         String query = "INSERT INTO llx_societe " +
                 "(nom, name_alias, entity, ref_ext, statut, parent, status, code_client, code_fournisseur, code_compta, " +
                 "code_compta_fournisseur, address, zip, town, fk_departement, fk_pays, phone, phone_mobile, fax, email, " +
-                "siren, siret, ape, client, fk_account) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "siren, siret, ape, client, fk_account, tva_intra, note_public, mode_reglement, cond_reglement) "+
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
             PreparedStatement stmtDolibarr = conn.prepareStatement(query);
 
             for (ThirdParty customer : customersArray) {
-                stmtDolibarr.setString(1, customer.getNom());
-                stmtDolibarr.setString(2, customer.getNameAlias());
-                stmtDolibarr.setObject(3, customer.getEntity());
-                stmtDolibarr.setString(4, customer.getRefExt());
-                stmtDolibarr.setObject(5, customer.getStatut());
-                stmtDolibarr.setObject(6, customer.getParent());
-                stmtDolibarr.setObject(7, customer.getStatus());
-                stmtDolibarr.setString(8, customer.getCodeClient());
-                stmtDolibarr.setString(9, customer.getCodeFournisseur());
-                stmtDolibarr.setString(10, customer.getCodeCompta());
-                stmtDolibarr.setString(11, customer.getCodeComptaFournisseur());
-                stmtDolibarr.setString(12, customer.getAddress());
-                stmtDolibarr.setString(13, customer.getZip());
-                stmtDolibarr.setString(14, customer.getTown());
-                stmtDolibarr.setObject(15, customer.getFkDepartement());
-                stmtDolibarr.setObject(16, customer.getFkPays());
-                stmtDolibarr.setString(17, customer.getPhone());
-                stmtDolibarr.setString(18, customer.getPhoneMobile());
-                stmtDolibarr.setString(19, customer.getFax());
-                stmtDolibarr.setString(20, customer.getEmail());
-                stmtDolibarr.setString(21, customer.getSiren());
-                stmtDolibarr.setString(22, customer.getSiret());
-                stmtDolibarr.setString(23, customer.getApe());
-                stmtDolibarr.setObject(24, customer.getClient());
-                stmtDolibarr.setObject(25, customer.getFkAccount());
+                int i = 1;
+                stmtDolibarr.setString(i++, customer.getNom());
+                stmtDolibarr.setString(i++, customer.getNameAlias());
+                stmtDolibarr.setObject(i++, customer.getEntity());
+                stmtDolibarr.setString(i++, customer.getRefExt());
+                stmtDolibarr.setObject(i++, customer.getStatut());
+                stmtDolibarr.setObject(i++, customer.getParent());
+                stmtDolibarr.setObject(i++, customer.getStatus());
+                stmtDolibarr.setString(i++, customer.getCodeClient());
+                stmtDolibarr.setString(i++, customer.getCodeFournisseur());
+                stmtDolibarr.setString(i++, customer.getCodeCompta());
+                stmtDolibarr.setString(i++, customer.getCodeComptaFournisseur());
+                stmtDolibarr.setString(i++, customer.getAddress());
+                stmtDolibarr.setString(i++, customer.getZip());
+                stmtDolibarr.setString(i++, customer.getTown());
+                stmtDolibarr.setObject(i++, customer.getFkDepartement());
+                stmtDolibarr.setObject(i++, customer.getFkPays());
+                stmtDolibarr.setString(i++, customer.getPhone());
+                stmtDolibarr.setString(i++, customer.getPhoneMobile());
+                stmtDolibarr.setString(i++, customer.getFax());
+                stmtDolibarr.setString(i++, customer.getEmail());
+                stmtDolibarr.setString(i++, customer.getSiren());
+                stmtDolibarr.setString(i++, customer.getSiret());
+                stmtDolibarr.setString(i++, customer.getApe());
+                stmtDolibarr.setObject(i++, customer.getClient());
+                stmtDolibarr.setObject(i++, customer.getFkAccount());
+                stmtDolibarr.setString(i++, customer.getTvaIntra());
+                stmtDolibarr.setString(i++, customer.getNotePublic());
+                stmtDolibarr.setInt(i++, customer.getModeReglement());
+                stmtDolibarr.setInt(i++, customer.getCondReglement());
 
                 stmtDolibarr.executeUpdate();
             }
@@ -177,17 +182,27 @@ public class ThirdPartyDAO {
         }
     }
     public ArrayList<ThirdParty> getSuppliers() {
+        String alias;
         int rowId = 0;
+        String siret;
         ArrayList<ThirdParty> customersArray = new ArrayList<>();
-        String query = "SELECT Id, Name, MainDeliveryContact_Name,  MainDeliveryContact_FirstName, Accounts_Account, MainDeliveryAddress_Address1, MainDeliveryAddress_ZipCode, MainDeliveryAddress_City, MainDeliveryAddress_State, MainDeliveryAddress_CountryIsoCode,  MainDeliveryContact_Phone,  MainDeliveryContact_Cellphone,  MainDeliveryContact_Fax,  MainDeliveryContact_Email, Siren, Nic, Naf, CurrentAmount, DiscountRate, IntracommunityVATNumber, VatMode, SettlementModeId, AllowedAmount, PaymentDate  FROM Supplier";
+        String query = "SELECT Id, Name, MainDeliveryContact_Name,  MainDeliveryContact_FirstName, Accounts_Account, MainDeliveryAddress_Address1, MainDeliveryAddress_ZipCode, MainDeliveryAddress_City, MainDeliveryAddress_State, MainDeliveryAddress_CountryIsoCode,  MainDeliveryContact_Phone,  MainDeliveryContact_Cellphone,  MainDeliveryContact_Fax,  MainDeliveryContact_Email, Siren, Nic, Naf, CurrentAmount, DiscountRate, IntracommunityVATNumber, VatMode, SettlementModeId, AllowedAmount, PaymentDate, NotesClear  FROM Supplier";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                String alias = rs.getString("MainDeliveryContact_Name") + " " + rs.getString("MainDeliveryContact_FirstName");
-                String siret = rs.getString("Siren") + rs.getString("Nic");
+                if (rs.getString("MainDeliveryContact_Name") != null && rs.getString("MainDeliveryContact_FirstName") != null) {
+                    alias = rs.getString("MainDeliveryContact_Name") + " " + rs.getString("MainDeliveryContact_FirstName");
+                } else {
+                    alias = null;
+                }
+                if (rs.getString("Siren") != null && rs.getString("Nic") != null) {
+                    siret = rs.getString("Siren") + rs.getString("Nic");
+                } else {
+                    siret = null;
+                }
 
                 DepartementsDAO depDao = new DepartementsDAO();
                 Integer departement = depDao.getRowId(rs.getString("MainDeliveryAddress_ZipCode"));
@@ -196,7 +211,7 @@ public class ThirdPartyDAO {
                 ThirdParty customer = new ThirdParty(
                         rowId,
                         rs.getString("Name"),
-                        alias,
+                        "",
                         1,
                         null,
                         0,
@@ -226,17 +241,17 @@ public class ThirdPartyDAO {
                         null,
                         null,
                         null,
-                        null,
                         rs.getString("Siren"),
                         siret,
                         rs.getString("Naf"),
+                        null,
                         null,
                         null,
                         rs.getString("IntracommunityVATNumber"),
                         null,
                         null,
                         null,
-                        null,
+                        rs.getString("NotesClear"),
                         null,
                         null,
                         null,
@@ -251,12 +266,12 @@ public class ThirdPartyDAO {
                         null,
                         null,
                         rs.getDouble("DiscountRate"),
-                        rs.getInt("SettlementModeId"),
+                        null,//rs.getInt("SettlementModeId")
                         rs.getInt("PaymentDate"),
                         null,
                         null,
-                        null,
-                        null,
+                        7,
+                        2,
                         null,
                         null,
                         1,
@@ -278,8 +293,8 @@ public class ThirdPartyDAO {
                         null,
                         null,
                         null,
-                        null,
-                        null,
+                        "707",
+                        "607",
                         null,
                         null,
                         null,
@@ -304,8 +319,8 @@ public class ThirdPartyDAO {
                 "(nom, name_alias, entity, status, code_fournisseur, code_compta_fournisseur, address, " +
                 "zip, town, fk_departement, fk_pays, phone, phone_mobile, fax, email, " +
                 "siren, siret, ape, tva_intra, remise_supplier, mode_reglement_supplier, " +
-                "cond_reglement_supplier, outstanding_limit, fournisseur, client, tva_assuj) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "cond_reglement_supplier, outstanding_limit, fournisseur, client, tva_assuj, note_public) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
             PreparedStatement stmtDolibarr = conn.prepareStatement(query);
@@ -373,6 +388,8 @@ public class ThirdPartyDAO {
                 Integer vatMode = 1;                                                        // tva_assuj (VatMode)
                 // VatMode dans EBP pourrait nécessiter une conversion selon les valeurs
                 stmtDolibarr.setInt(paramIndex++, vatMode);
+
+                stmtDolibarr.setString(paramIndex++, customer.getNotePublic());
 
                 stmtDolibarr.executeUpdate();
             }

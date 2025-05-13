@@ -15,7 +15,7 @@ public class ProductDAO {
         Integer rowId = 0;
         Product product;
 
-        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, Notes, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, RealStock, Pump FROM Item WHERE ItemType = 0";
+        String query = "SELECT Id, sysCreatedDate, sysModifiedDate, Caption, NotesClear, DesComClear, UnitId, SalePriceVatExcluded, SalePriceVatIncluded, CostPrice, Weight, WeightUnitId, Volume, VolumeUnitId, Length, Width, Height, DimensionUnitId, RealStock, Pump FROM Item WHERE ItemType = 0";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -44,9 +44,9 @@ public class ProductDAO {
                         rs.getTimestamp("sysModifiedDate"),
                         0,
                         rs.getString("Caption"),
+                        rs.getString("DesComClear"),
+                        rs.getString("NotesClear"),
                         null,
-                        null,
-                        rs.getString("Notes"),
                         null,
                         null,
                         null,
@@ -77,12 +77,12 @@ public class ProductDAO {
                         null,
                         null,
                         null,
-                        String.valueOf(accountingCodes.get(0)),
-                        String.valueOf(accountingCodes.get(1)),
-                        String.valueOf(accountingCodes.get(2)),
-                        String.valueOf(accountingCodes.get(3)),
-                        String.valueOf(accountingCodes.get(4)),
-                        String.valueOf(accountingCodes.get(5)),
+                        "707",
+                        "707",
+                        "707",
+                        "607",
+                        "607",
+                        "607",
                         null,
                         null,
                         null,
@@ -123,7 +123,6 @@ public class ProductDAO {
                 );
                 listProducts.add(product);
             }
-
             return listProducts;
         }
     }
