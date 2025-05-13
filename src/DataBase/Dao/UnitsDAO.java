@@ -59,16 +59,25 @@ public class UnitsDAO {
     }
 
     public Integer getRowIDFromCode(String unitCode) {
+        if (unitCode == null) {
+            return null;
+        }
+        if ("U".equals(unitCode)) {
+            unitCode = "P";
+        }
+        if ("C".equals(unitCode)) {
+            unitCode = "SET";
+        }
         String sql = "SELECT rowid FROM llx_c_units WHERE code = ?";
-        try ( Connection conn = DolibarrDatabaseConnection.getConnection();
-              PreparedStatement ps = conn.prepareStatement(sql) ) {
+        try (Connection conn = DolibarrDatabaseConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, unitCode);
-            try ( ResultSet rs = ps.executeQuery() ) {
+            try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return rs.getInt("rowid");
                 }
             }
-        } catch (SQLException|ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return null;

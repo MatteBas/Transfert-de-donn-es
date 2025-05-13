@@ -1,10 +1,7 @@
 import DataBase.Dao.*;
 import DataBase.DolibarrDatabaseConnection;
 import DataBase.EBPDatabaseConnection;
-import ObjetDolibarr.Categorie;
-import ObjetDolibarr.Product;
-import ObjetDolibarr.ThirdParty;
-import ObjetDolibarr.Units;
+import ObjetDolibarr.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +15,7 @@ public class ProgrammeTransfertDeDonnees {
 
         CategorieDAO categorieDAO = new CategorieDAO();
         ArrayList<Categorie>categories = new ArrayList<>();
-        categories = categorieDAO.getAllCategorie();
+        categories = categorieDAO.getAllProductCategorie();
         categorieDAO.insertCategorie(categories);
 
         ProductNatureDAO fourniture = new ProductNatureDAO();
@@ -40,6 +37,25 @@ public class ProgrammeTransfertDeDonnees {
         ArrayList<ThirdParty> suppliers = new ArrayList<>();
         suppliers = thirdPartyDAO.getSuppliers();
         thirdPartyDAO.insertSuppliers(suppliers);
+
+        SupplierProductDAO supplierProductDAO = new SupplierProductDAO();
+        ArrayList<SupplierProduct> supplierProducts = new ArrayList<>();
+        supplierProducts = supplierProductDAO.getSuppliersAndProducts();
+        supplierProductDAO.insertSupplierProduct(supplierProducts);
+
+        categories = categorieDAO.getAllSupplierCategorie();
+        categorieDAO.insertCategorie(categories);
+
+        SupplierFamilyDAO supplierFamilyDAO = new SupplierFamilyDAO();
+        ArrayList<SupplierFamily> supplierFamilies = new ArrayList<>();
+        supplierFamilies = supplierFamilyDAO.getSupplierFamilies();
+        System.out.println(supplierFamilies);
+        supplierFamilyDAO.insertSupplierFamily(supplierFamilies);
+
+
+
+
+
 
 
 

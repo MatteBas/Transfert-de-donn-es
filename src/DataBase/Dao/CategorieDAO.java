@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class CategorieDAO {
 
-    public ArrayList<Categorie> getAllCategorie() {
+    public ArrayList<Categorie> getAllProductCategorie() {
         int rowId = 0;
         ArrayList<Categorie> categoriesArray = new ArrayList<>();
         String query = "SELECT Caption, SysCreatedDate, SysModifiedDate FROM ItemFamily";
@@ -128,5 +128,82 @@ public class CategorieDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+    public ArrayList<Categorie> getAllSupplierCategorie() {
+        int rowId = 0;
+        ArrayList<Categorie> categoriesArray = new ArrayList<>();
+        String query = "SELECT Id, Caption, SysCreatedDate, SysModifiedDate FROM SupplierFamily";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+
+                rowId++;
+                Categorie categorie = new Categorie(
+                        rowId,
+                        1,
+                        0,
+                        rs.getString("Caption"),
+                        null,
+                        1,
+                        rs.getString("Id"),
+                        "000000",
+                        0,
+                        null,
+                        0,
+                        rs.getDate("SysCreatedDate"),
+                        rs.getDate("SysModifiedDate"),
+                        1,
+                        1,
+                        null
+                );
+                categoriesArray.add(categorie);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return categoriesArray;
+    }
+    public Integer getRowIdFromSupplierId(String supplierId) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
+        System.out.println(supplierId);
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT rowid FROM llx_categorie WHERE label = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection();
+             PreparedStatement stmtDolibarr = conn.prepareStatement(query)) {
+                stmtDolibarr.setString(1, supplierId);
+                try (ResultSet rs = stmtDolibarr.executeQuery()) {
+                    if (rs.next()) {
+                        rowId = rs.getInt("rowid");
+                    }
+                }
+            }
+        return rowId;
+    }
+    public String getCaptionFromSupplierId(String supplierId) throws SQLException, ClassNotFoundException {
+        String caption = null;
+        System.out.println(supplierId);
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT Caption FROM SupplierFamily WHERE Id = ?";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, supplierId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                      caption = rs.getString("Caption");
+                    }
+                }
+            }
+        }
+        return caption;
     }
 }

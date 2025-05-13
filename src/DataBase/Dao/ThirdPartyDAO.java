@@ -399,5 +399,44 @@ public class ThirdPartyDAO {
             e.printStackTrace();
         }
     }
+
+    public Integer getRowIdFromId(String supplierId) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
+
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT rowid FROM llx_societe WHERE code_fournisseur = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, supplierId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        rowId = rs.getInt("rowid");
+                    }
+                }
+            }
+        }
+        return rowId;
+    }
+    public String getNameFromId(String supplierId) throws SQLException, ClassNotFoundException {
+        String name = null;
+
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT nom FROM llx_societe WHERE code_fournisseur = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, supplierId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        name = rs.getString("nom");
+                    }
+                }
+            }
+        }
+        return name;
+    }
 }
 

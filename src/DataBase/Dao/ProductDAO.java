@@ -22,16 +22,15 @@ public class ProductDAO {
              ResultSet rs = stmt.executeQuery(query)) {
             while (rs.next()) {
 
-            VatDAO vatDAO = new VatDAO();
-            ArrayList<Integer> accountingCodes = vatDAO.getAccountingCode();
+                VatDAO vatDAO = new VatDAO();
+                ArrayList<Integer> accountingCodes = vatDAO.getAccountingCode();
 
-            UnitsDAO unitsDAO = new UnitsDAO();
-            Integer weightScale = unitsDAO.getScaleFromUnit(rs.getString("WeightUnitId"));
-            Integer volumeScale = unitsDAO.getScaleFromUnit(rs.getString("VolumeUnitId"));
-            Integer dimensionScale = unitsDAO.getScaleFromUnit(rs.getString("DimensionUnitId"));
+                UnitsDAO unitsDAO = new UnitsDAO();
+                Integer weightScale = unitsDAO.getScaleFromUnit(rs.getString("WeightUnitId"));
+                Integer volumeScale = unitsDAO.getScaleFromUnit(rs.getString("VolumeUnitId"));
+                Integer dimensionScale = unitsDAO.getScaleFromUnit(rs.getString("DimensionUnitId"));
 
-             Integer sellUnit = unitsDAO.getRowIDFromCode(rs.getString("UnitId"));
-
+                Integer sellUnit = unitsDAO.getRowIDFromCode(rs.getString("UnitId"));
 
 
                 rowId++;
@@ -237,5 +236,25 @@ public class ProductDAO {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public Integer getRowIdFromId(String ItemId) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
+
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT rowid FROM llx_product WHERE ref = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, ItemId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        rowId = rs.getInt("rowid");
+                    }
+                }
+            }
+        }
+        return rowId;
     }
 }
