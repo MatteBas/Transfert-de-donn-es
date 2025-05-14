@@ -1,11 +1,6 @@
 import DataBase.Dao.*;
-import DataBase.DolibarrDatabaseConnection;
-import DataBase.EBPDatabaseConnection;
 import ObjetDolibarr.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -46,11 +41,15 @@ public class ProgrammeTransfertDeDonnees {
         categories = categorieDAO.getAllSupplierCategorie();
         categorieDAO.insertCategorie(categories);
 
-        SupplierFamilyDAO supplierFamilyDAO = new SupplierFamilyDAO();
-        ArrayList<SupplierFamily> supplierFamilies = new ArrayList<>();
+        ThirdPartyFamilyDAO supplierFamilyDAO = new ThirdPartyFamilyDAO();
+        ArrayList<ThirdPartyFamily> supplierFamilies = new ArrayList<>();
         supplierFamilies = supplierFamilyDAO.getSupplierFamilies();
-        System.out.println(supplierFamilies);
         supplierFamilyDAO.insertSupplierFamily(supplierFamilies);
+
+        ThirdPartyFamilyDAO customerFamilyDAO = new ThirdPartyFamilyDAO();
+        ArrayList<ThirdPartyFamily> customersFamilies = new ArrayList<>();
+        customersFamilies = customerFamilyDAO.getCustomersFamilies();
+        supplierFamilyDAO.insertCustomerFamily(customersFamilies);
 
 
 

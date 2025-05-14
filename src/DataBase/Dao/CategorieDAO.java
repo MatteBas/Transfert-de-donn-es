@@ -206,4 +206,46 @@ public class CategorieDAO {
         }
         return caption;
     }
+
+    public ArrayList<Categorie> getAllCustomerCategorie() {
+        int rowId = 0;
+        ArrayList<Categorie> categoriesArray = new ArrayList<>();
+        String query = "SELECT Id, Caption, SysCreatedDate, SysModifiedDate FROM SupplierFamily";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+
+                rowId++;
+                Categorie categorie = new Categorie(
+                        rowId,
+                        1,
+                        0,
+                        rs.getString("Caption"),
+                        null,
+                        2,
+                        rs.getString("Id"),
+                        "000000",
+                        0,
+                        null,
+                        0,
+                        rs.getDate("SysCreatedDate"),
+                        rs.getDate("SysModifiedDate"),
+                        1,
+                        1,
+                        null
+                );
+                categoriesArray.add(categorie);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+
+        return categoriesArray;
+    }
 }

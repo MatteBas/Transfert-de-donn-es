@@ -1,11 +1,11 @@
 package ObjetDolibarr;
 
-public class SupplierFamily {
+public class ThirdPartyFamily {
     Integer fk_categorie;
     Integer fk_soc;
     String import_key;
 
-    public SupplierFamily(Integer fk_categorie, Integer fk_soc, String import_key) {
+    public ThirdPartyFamily(Integer fk_categorie, Integer fk_soc, String import_key) {
         this.fk_categorie = fk_categorie;
         this.fk_soc = fk_soc;
         this.import_key = import_key;
