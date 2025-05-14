@@ -9,5 +9,23 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mariadb-java-client-3.5.3" level="project" />
     <orderEntry type="library" name="mssql-jdbc-12.10.0.jre12" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/MariaDBDriver/mariadb-java-client-3.5.3.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/MicrosoftSQLDriver/sqljdbc_12.10/fra/jars/mssql-jdbc-12.10.0.jre11.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

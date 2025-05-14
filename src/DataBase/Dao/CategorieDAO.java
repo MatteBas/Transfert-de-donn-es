@@ -187,6 +187,7 @@ public class CategorieDAO {
             }
         return rowId;
     }
+
     public String getCaptionFromSupplierId(String supplierId) throws SQLException, ClassNotFoundException {
         String caption = null;
         System.out.println(supplierId);
@@ -210,7 +211,7 @@ public class CategorieDAO {
     public ArrayList<Categorie> getAllCustomerCategorie() {
         int rowId = 0;
         ArrayList<Categorie> categoriesArray = new ArrayList<>();
-        String query = "SELECT Id, Caption, SysCreatedDate, SysModifiedDate FROM SupplierFamily";
+        String query = "SELECT Id, Caption, SysCreatedDate, SysModifiedDate FROM CustomerFamily";
 
         try (Connection conn = EBPDatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -247,5 +248,41 @@ public class CategorieDAO {
         }
 
         return categoriesArray;
+    }
+    public String getCaptionFromCustomerId(String customerId) throws SQLException, ClassNotFoundException {
+        String caption = null;
+        System.out.println(customerId);
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT Caption FROM CustomerFamily WHERE Id = ?";
+
+        try (Connection conn = EBPDatabaseConnection.getConnection()) {
+
+            try (PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, customerId);
+                try (ResultSet rs = stmt.executeQuery()) {
+                    if (rs.next()) {
+                        caption = rs.getString("Caption");
+                    }
+                }
+            }
+        }
+        return caption;
+    }
+    public Integer getRowIdFromCustomerId(String customerId) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
+        System.out.println(customerId);
+        // Utilisation de requêtes paramétrées (évite les injections SQL)
+        String query = "SELECT rowid FROM llx_categorie WHERE label = ?";
+
+        try (Connection conn = DolibarrDatabaseConnection.getConnection();
+             PreparedStatement stmtDolibarr = conn.prepareStatement(query)) {
+            stmtDolibarr.setString(1, customerId);
+            try (ResultSet rs = stmtDolibarr.executeQuery()) {
+                if (rs.next()) {
+                    rowId = rs.getInt("rowid");
+                }
+            }
+        }
+        return rowId;
     }
 }

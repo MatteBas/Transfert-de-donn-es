@@ -400,7 +400,7 @@ public class ThirdPartyDAO {
         }
     }
 
-    public Integer getRowIdFromId(String supplierId) throws SQLException, ClassNotFoundException {
+    public Integer getRowIdFromSupplierId(String supplierId) throws SQLException, ClassNotFoundException {
         Integer rowId = null;
 
         // Utilisation de requêtes paramétrées (évite les injections SQL)
@@ -419,24 +419,24 @@ public class ThirdPartyDAO {
         }
         return rowId;
     }
-    public String getNameFromId(String supplierId) throws SQLException, ClassNotFoundException {
-        String name = null;
+    public Integer getRowIdFromCustomerId(String customerId) throws SQLException, ClassNotFoundException {
+        Integer rowId = null;
 
         // Utilisation de requêtes paramétrées (évite les injections SQL)
-        String query = "SELECT nom FROM llx_societe WHERE code_fournisseur = ?";
+        String query = "SELECT rowid FROM llx_societe WHERE code_client = ?";
 
         try (Connection conn = DolibarrDatabaseConnection.getConnection()) {
 
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1, supplierId);
+                stmt.setString(1, customerId);
                 try (ResultSet rs = stmt.executeQuery()) {
                     if (rs.next()) {
-                        name = rs.getString("nom");
+                        rowId = rs.getInt("rowid");
                     }
                 }
             }
         }
-        return name;
+        return rowId;
     }
 }
 

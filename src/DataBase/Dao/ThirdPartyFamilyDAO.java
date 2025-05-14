@@ -32,7 +32,7 @@ public class ThirdPartyFamilyDAO {
                 System.out.println(fk_categorie);
 
                 ThirdPartyDAO thirdPartyDAO = new ThirdPartyDAO();
-                fk_soc = thirdPartyDAO.getRowIdFromId(rs.getString("Id"));
+                fk_soc = thirdPartyDAO.getRowIdFromSupplierId(rs.getString("Id"));
 
                 ThirdPartyFamily supplierFamily = new ThirdPartyFamily(fk_categorie, fk_soc, import_key);
                 supplierFamilies.add(supplierFamily);
@@ -82,16 +82,16 @@ public class ThirdPartyFamilyDAO {
                 while (rs.next()) {
 
                     CategorieDAO categorieDAO = new CategorieDAO();
-                    supplierCaption = categorieDAO.getCaptionFromSupplierId(rs.getString("FamilyId"));
+                    supplierCaption = categorieDAO.getCaptionFromCustomerId(rs.getString("FamilyId"));
                     System.out.println(supplierCaption);
-                    fk_categorie = categorieDAO.getRowIdFromSupplierId(supplierCaption);
+                    fk_categorie = categorieDAO.getRowIdFromCustomerId(supplierCaption);
                     System.out.println(fk_categorie);
 
                     ThirdPartyDAO thirdPartyDAO = new ThirdPartyDAO();
-                    fk_soc = thirdPartyDAO.getRowIdFromId(rs.getString("Id"));
+                    fk_soc = thirdPartyDAO.getRowIdFromCustomerId(rs.getString("Id"));
 
-                    ThirdPartyFamily supplierFamily = new ThirdPartyFamily(fk_categorie, fk_soc, import_key);
-                    supplierFamilies.add(supplierFamily);
+                    ThirdPartyFamily customerFamily = new ThirdPartyFamily(fk_categorie, fk_soc, import_key);
+                    supplierFamilies.add(customerFamily);
                 }
 
             } catch (SQLException | ClassNotFoundException e) {

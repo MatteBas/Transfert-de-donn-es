@@ -27,7 +27,7 @@ public class CustomerProductDAO {
                     itemRowId = productDAO.getRowIdFromId(rs.getString("ItemId"));
                     if (itemRowId != null) {
                         ThirdPartyDAO thirdPartyDAO = new ThirdPartyDAO();
-                        thirdPartyRowId = thirdPartyDAO.getRowIdFromId(rs.getString("SupplierId"));
+                        thirdPartyRowId = thirdPartyDAO.getRowIdFromCustomerId(rs.getString("SupplierId"));
 
                         rowId++;
                         CustomerProduct customerProduct = new CustomerProduct(

@@ -46,6 +46,9 @@ public class ProgrammeTransfertDeDonnees {
         supplierFamilies = supplierFamilyDAO.getSupplierFamilies();
         supplierFamilyDAO.insertSupplierFamily(supplierFamilies);
 
+        categories = categorieDAO.getAllCustomerCategorie();
+        categorieDAO.insertCategorie(categories);
+
         ThirdPartyFamilyDAO customerFamilyDAO = new ThirdPartyFamilyDAO();
         ArrayList<ThirdPartyFamily> customersFamilies = new ArrayList<>();
         customersFamilies = customerFamilyDAO.getCustomersFamilies();
